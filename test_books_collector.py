@@ -2,13 +2,12 @@ import pytest
 from main import BooksCollector
 
 
-# Фикстура для создания экземпляра BooksCollector
 @pytest.fixture
 def collector():
     return BooksCollector()
 
 
-# Класс TestBooksCollector объединяет набор тестов для приложения BooksCollector
+
 class TestBooksCollector:
 
     def test_add_new_book_add_two_books(self, collector):
@@ -55,11 +54,8 @@ class TestBooksCollector:
         ("1794 Никлас Натт-о-Даг", "Детективы")
     ])
     def test_set_book_genre_valid_genres(self, collector, book_name, genre):
-        # Добавляем книгу
         collector.add_new_book(book_name)
-        # Устанавливаем жанр
         collector.set_book_genre(book_name, genre)
-        # Проверяем, что жанр установлен правильно
         assert collector.books_genre[book_name] == genre
 
     @pytest.mark.parametrize("book_name, genre", [
@@ -132,7 +128,6 @@ class TestBooksCollector:
         assert books_with_genre == expected_books
 
     def test_get_books_with_specific_genre_no_matches(self, collector):
-        # Добавляем книги
         collector.add_new_book("Резьба по живому")
         collector.set_book_genre("Резьба по живому", "Ужасы")
         collector.add_new_book("Прачечная, стирающая печали")
